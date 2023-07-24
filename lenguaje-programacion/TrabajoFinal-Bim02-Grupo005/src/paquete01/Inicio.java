@@ -8,15 +8,18 @@ import paquete02.PlanPostPagoMegas;
 import paquete02.PlanPostPagoMinutos;
 import paquete02.PlanPostPagoMinutosMegas;
 import paquete02.PlanPostPagoMinutosMegasEconomico;
+import paquete03.Enlace;
 
 public class Inicio {
+    private static Enlace en;
 
     public static void main(String[] args) {
         Scanner ent = new Scanner(System.in);
 
-        ArrayList<PlanCelular> lista = new ArrayList<>();
+        ArrayList<PlanCelular> lista;
         int opcion;
         boolean bandera = true;
+        en = new Enlace();
 
         while (bandera) {
             System.out.print("""
@@ -34,16 +37,16 @@ public class Inicio {
 
             switch (opcion) {
                 case 1:
-                    lista.add(ingreso01());
+                    ingreso01();
                     break;
                 case 2:
-                    lista.add(ingreso02());
+                    ingreso02();
                     break;
                 case 3:
-                    lista.add(ingreso03());
+                    ingreso03();
                     break;
                 case 4:
-                    lista.add(ingreso04());
+                    ingreso04();
                     break;
                 case 5:
                     bandera = false;
@@ -53,12 +56,19 @@ public class Inicio {
             }
         }
 
+        en.establecerDataPostPagoMinMegEcono();
+        en.establecerDataPostPagoMinMeg();
+        en.establecerDataPostPagoMin();
+        en.establecerDataPostPagoMegas();
+        
+        lista = en.obtenerLista();
+        
         for (PlanCelular p : lista) {
             System.out.println(p);
         }
     }
 
-    public static PlanPostPagoMinutosMegasEconomico ingreso01() {
+    public static void ingreso01() {
         Scanner ent = new Scanner(System.in);
         ent.useLocale(Locale.US);
 
@@ -96,7 +106,7 @@ public class Inicio {
         minutos = ent.nextDouble();
         System.out.print("Ingrese el costo de los minutos: ");
         costoMinutos = ent.nextDouble();
-        System.out.print("Ingrese los megas: ");
+        System.out.print("Ingrese los megas (EN GB): ");
         megas = ent.nextDouble();
         System.out.print("Ingrese el costo de los megas: ");
         costoMegas = ent.nextDouble();
@@ -111,11 +121,11 @@ public class Inicio {
                         ciudadPropietario, barrioPropietario,
                         marcaCelular, modeloCelular, nroCelular);
         p01.calcularPagoMensual();
-
-        return p01;
+        
+        en.insertarPostPagoMinMegEcono(p01);
     }
 
-    public static PlanPostPagoMinutos ingreso02() {
+    public static void ingreso02() {
         Scanner ent = new Scanner(System.in);
         ent.useLocale(Locale.US);
 
@@ -166,10 +176,10 @@ public class Inicio {
                         marcaCelular, modeloCelular, nroCelular);
         p02.calcularPagoMensual();
 
-        return p02;
+        en.insertarPostPagoMin(p02);
     }
 
-    public static PlanPostPagoMegas ingreso03() {
+    public static void ingreso03() {
         Scanner ent = new Scanner(System.in);
         ent.useLocale(Locale.US);
 
@@ -201,7 +211,7 @@ public class Inicio {
         modeloCelular = ent.nextLine();
         System.out.print("Ingrese el numero de celular: ");
         nroCelular = ent.nextInt();
-        System.out.print("Ingrese los megas: ");
+        System.out.print("Ingrese los megas (En GB): ");
         megas = ent.nextDouble();
         System.out.print("Ingrese el costo de los megas: ");
         costoMegas = ent.nextDouble();
@@ -217,10 +227,10 @@ public class Inicio {
                         marcaCelular, modeloCelular, nroCelular);
         p03.calcularPagoMensual();
 
-        return p03;
+        en.insertarPostPagoMegas(p03);
     }
 
-    public static PlanPostPagoMinutosMegas ingreso04() {
+    public static void ingreso04() {
         Scanner ent = new Scanner(System.in);
         ent.useLocale(Locale.US);
 
@@ -257,7 +267,7 @@ public class Inicio {
         minutos = ent.nextDouble();
         System.out.print("Ingrese el costo de los minutos: ");
         costoMinutos = ent.nextDouble();
-        System.out.print("Ingrese los megas: ");
+        System.out.print("Ingrese los megas (en GB): ");
         megas = ent.nextDouble();
         System.out.print("Ingrese el costo de los megas: ");
         costoMegas = ent.nextDouble();
@@ -271,7 +281,7 @@ public class Inicio {
                         marcaCelular, modeloCelular, nroCelular);
         p04.calcularPagoMensual();
 
-        return p04;
+        en.insertarPostPagoMinMeg(p04);
     }
 
 }
