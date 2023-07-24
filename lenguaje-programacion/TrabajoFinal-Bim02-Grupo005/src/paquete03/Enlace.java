@@ -15,7 +15,13 @@ import paquete02.PlanPostPagoMinutosMegasEconomico;
 public class Enlace {
 
     private Connection conn;
-    private ArrayList<PlanCelular> lista = new ArrayList<>();
+    private ArrayList<PlanCelular> lista;
+    
+    public Enlace(){
+        
+    lista = new ArrayList<>();
+    
+    }
 
     public void establecerConexion() {
         try {
